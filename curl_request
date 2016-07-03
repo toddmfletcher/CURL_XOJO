@@ -1,0 +1,24 @@
+        //Authorization $pdata = ***
+				$URLBase = "http://someurl/special/";
+				$URL2 = "somespecialurlhandle";
+				function curl_request($url,  $postdata) //single custom cURL request.
+				{
+	
+					$ch = curl_init();
+					curl_setopt_array($ch, array(
+						CURLOPT_URL => $url,
+						CURLOPT_POST => 1,
+						CURLOPT_POSTFIELDS => $postdata . "&", // 10/3/14 added & due to XOJO framework update
+						CURLOPT_RETURNTRANSFER => true
+					));
+					
+					$response = curl_exec($ch);
+					
+					curl_close($ch);
+					
+					return $response;
+				}
+				
+				$data = curl_request($URLBase . $URL2, $pdata); //return cURL request to $data
+				
+				$json1 = json_decode($data, true);
